@@ -105,6 +105,39 @@ class ListController extends ControllerAction
 
     public function index_onDelete()
     {
+        //print_r($_POST);exit;
+         $checkedIds = post('checked');
+         $checkedId = $checkedIds[0];
+          if($_POST['userAvailabilityCheck'][$checkedId] == 'Disabled'){
+            $statusFlag = 1;
+          }else{
+            $statusFlag = 0;
+          }
+         
+
+         $alias = $this->primaryAlias;
+         
+        
+        $username="root";
+        $password="vagrant";
+        $database="fulligniter";
+
+        $connection=mysqli_connect ('localhost', $username, $password);
+        $db_selected = mysqli_select_db( $connection,$database);
+        
+         $query = "UPDATE ti_staffs as s, ti_users as u SET s.staff_status = $statusFlag,u.is_activated = $statusFlag 
+        WHERE s.staff_id = $checkedId AND s.staff_id = u.staff_id";
+        //echo $query; exit;
+        $result = mysqli_query($connection,$query);
+
+
+        flash()->success(sprintf(lang('admin::lang.alert_success'), lang('Record updated')));
+        return $this->controller->refreshList($alias);
+
+    }
+
+    public function index_onDelete_bak()
+    {
         $checkedIds = post('checked');
         if (!$checkedIds OR !is_array($checkedIds) OR !count($checkedIds)) {
             flash()->success(lang('admin::lang.list.delete_empty'));
@@ -122,6 +155,7 @@ class ListController extends ControllerAction
         $model = $this->controller->listExtendModel($model, $alias);
 
         $query = $model->newQuery();
+     
         $this->controller->listExtendQueryBefore($query, $alias);
 
         $query->whereIn($model->getKeyName(), $checkedIds);
