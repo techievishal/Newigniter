@@ -18,7 +18,7 @@ class Login extends \Admin\Classes\AdminController
     public function index()
     {
         if (AdminAuth::isLogged())
-            return $this->redirect('locations');
+            return $this->redirect('staffs');
 
         Template::setTitle(lang('admin::lang.login.text_title'));
 
@@ -26,8 +26,9 @@ class Login extends \Admin\Classes\AdminController
             $credentials = [
                 'username' => post('user'),
                 'password' => post('password'),
+                'is_activated'=>1
             ];
-
+//echo AdminAuth::authenticate($credentials, TRUE, TRUE);exit;
             if (!AdminAuth::authenticate($credentials, TRUE, TRUE)) {
                 flash()->danger(lang('admin::lang.login.alert_username_not_found'));
 
@@ -36,8 +37,12 @@ class Login extends \Admin\Classes\AdminController
 
             if ($redirectUrl = input('redirect'))
                 return $this->redirect($redirectUrl);
-
-            return $this->redirectIntended('locations');
+                
+                if (!AdminAuth::isSuperUser()) {
+                    return $this->redirectIntended('locations/settings');
+                }else{
+                    return $this->redirectIntended('staffs');
+                }
         }
 
         return $this->makeView('auth/login');
