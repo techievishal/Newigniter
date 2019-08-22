@@ -64,7 +64,7 @@ $config['list']['columns'] = [
         
         'attributes' => [
             'class' => 'btn btn-primary',
-            'href' => 'staffs/edit/{staff_id}',
+            'href' => 'staffs/update/{staff_id}',
         ],
     ],
 
