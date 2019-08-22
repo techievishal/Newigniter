@@ -11,9 +11,10 @@ class Logout extends \Admin\Classes\AdminController
     public function index()
     {
         AdminAuth::logout();
+       
 
         flash()->success(lang('admin::lang.login.alert_success_logout'));
 
-        return $this->redirect('login');
+        return $this->redirect('../');
     }
 }
