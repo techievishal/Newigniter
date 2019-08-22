@@ -7,6 +7,7 @@ use Admin\Models\Locations_model;
 use Admin\Actions\FormController;
 use Admin\Controllers\Staffs;
 use Admin\Traits\ValidatesForm;
+use AdminAuth;
 use ApplicationException;
 use Auth;
 use Cart;
@@ -255,6 +256,15 @@ class Account extends \System\Classes\BaseComponent
           
      
             $test->addStaffUser($data);
+            $credentials = [
+                'username' => $data['user']['username'],
+                'password' => $data['user']['password'],
+            ];
+
+            if (AdminAuth::authenticate($credentials, TRUE, TRUE)) {
+                return $this->redirectIntended('admin/locations/settings');
+            }
+            
 
             $redirectUrl = $this->controller->pageUrl($this->property('redirectPage'));
 
