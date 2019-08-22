@@ -1,0 +1,40 @@
+1566452847a:1:{s:8:"cart.php";a:10:{s:8:"fileName";s:8:"cart.php";s:5:"mTime";i:1565837145;s:7:"content";s:536:"---
+title: main::lang.cart.title
+layout: default
+permalink: /cart
+
+'[localBox]':
+
+'[cartBox]':
+    pageIsCart: 1
+---
+<div class="container">
+    <div class="row py-4">
+        <div class="col col-sm-6 m-auto">
+            <div class="cart-buttons wrap-bottom">
+                <a
+                    class="btn btn-default btn-block btn-md"
+                    href="<?= restaurant_url('local/menus'); ?>"
+                >Add more items</a>
+            </div>
+
+            <?= component('cartBox'); ?>
+        </div>
+    </div>
+</div>
+";s:6:"markup";s:420:"
+<div class="container">
+    <div class="row py-4">
+        <div class="col col-sm-6 m-auto">
+            <div class="cart-buttons wrap-bottom">
+                <a
+                    class="btn btn-default btn-block btn-md"
+                    href="<?= restaurant_url('local/menus'); ?>"
+                >Add more items</a>
+            </div>
+
+            <?= component('cartBox'); ?>
+        </div>
+    </div>
+</div>
+";s:4:"code";N;s:5:"title";s:21:"main::lang.cart.title";s:6:"layout";s:7:"default";s:9:"permalink";s:5:"/cart";s:10:"[localBox]";N;s:9:"[cartBox]";a:1:{s:10:"pageIsCart";i:1;}}}

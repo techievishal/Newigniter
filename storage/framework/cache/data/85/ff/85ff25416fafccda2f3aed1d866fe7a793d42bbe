@@ -1,0 +1,63 @@
+1566452847a:1:{s:11:"contact.php";a:9:{s:8:"fileName";s:11:"contact.php";s:5:"mTime";i:1565837145;s:7:"content";s:1339:"---
+title: main::lang.contact.title
+layout: default
+permalink: /contact
+
+'[contact]':
+---
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <div class="card mb-3">
+                <?php if ($contactLocation = $contact->location) { ?>
+                    <div class="card-body">
+                        <h1 class="h3 card-title"><?= $contactLocation->getName(); ?></h1>
+                        <div class="row contact-info mb-2">
+                            <div class="col-1"><i class="fa fa-globe"></i></div>
+                            <div class="col"><?= format_address($contactLocation->getAddress()); ?></div>
+                        </div>
+                        <div class="row contact-info">
+                            <div class="col-1"><i class="fa fa-phone"></i></div>
+                            <div class="col"><?= $contactLocation->getTelephone(); ?></div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="contact-title mb-3"><?= lang('igniter.frontend::default.contact.text_summary'); ?></h4>
+                    <?= component('contact'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:6:"markup";s:1250:"
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 m-auto">
+            <div class="card mb-3">
+                <?php if ($contactLocation = $contact->location) { ?>
+                    <div class="card-body">
+                        <h1 class="h3 card-title"><?= $contactLocation->getName(); ?></h1>
+                        <div class="row contact-info mb-2">
+                            <div class="col-1"><i class="fa fa-globe"></i></div>
+                            <div class="col"><?= format_address($contactLocation->getAddress()); ?></div>
+                        </div>
+                        <div class="row contact-info">
+                            <div class="col-1"><i class="fa fa-phone"></i></div>
+                            <div class="col"><?= $contactLocation->getTelephone(); ?></div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="contact-title mb-3"><?= lang('igniter.frontend::default.contact.text_summary'); ?></h4>
+                    <?= component('contact'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:4:"code";N;s:5:"title";s:24:"main::lang.contact.title";s:6:"layout";s:7:"default";s:9:"permalink";s:8:"/contact";s:9:"[contact]";N;}}

@@ -1,0 +1,148 @@
+1566140297a:1:{s:9:"local.php";a:12:{s:8:"fileName";s:9:"local.php";s:5:"mTime";i:1565837145;s:7:"content";s:2189:"---
+description: 'Local layout'
+
+'[session]':
+    security: all
+
+'[pageNav]': {  }
+
+'[newsletter]': {  }
+
+'[localBox]':
+    paramFrom: location
+    showLocalThumb: 0
+    menusPage: local/menus
+    openTimeFormat: 'H:i'
+    timePickerDateFormat: 'D d'
+    timePickerTimeFormat: 'H:i'
+    timePickerDateTimeFormat: 'D d H:i'
+
+'[categories]':
+    menusPage: local/menus
+
+'[cartBox]':
+    timeFormat: 'D H:i a'
+    checkStockCheckout: 1
+    pageIsCheckout: 0
+    pageIsCart: 0
+    checkoutPage: checkout/checkout
+
+---
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<?= App::getLocale(); ?>">
+<head>
+    <?= partial('head'); ?>
+</head>
+<body class="<?= $this->page->bodyClass; ?>">
+
+    <header class="header">
+        <?= partial('nav/menu'); ?>
+    </header>
+
+    <main role="main">
+        <div id="page-wrapper">
+            <?= partial('breadcrumb'); ?>
+
+            <?php if (isset($this->page->heading)) { ?>
+                <?= partial('heading', ['heading' => $this->page->heading]); ?>
+            <?php } ?>
+
+            <div class="container">
+                <div class="row py-4">
+                    <div class="col-sm-2 d-none d-sm-inline-block">
+                        <div class="categories affix-categories">
+                            <?= component('categories'); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="content">
+                            <?= component('localBox'); ?>
+
+                            <?= page(); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <?= component('cartBox'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer pb-4">
+        <div class="footer-top">
+            <?= component('newsletter'); ?>
+        </div>
+
+        <div class="footer-bottom">
+            <?= partial('footer'); ?>
+        </div>
+    </footer>
+    <div id="notification">
+        <?= partial('flash'); ?>
+    </div>
+    <?= partial('eucookiebanner'); ?>
+    <?= partial('scripts'); ?>
+</body>
+</html>";s:6:"markup";s:1676:"
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<?= App::getLocale(); ?>">
+<head>
+    <?= partial('head'); ?>
+</head>
+<body class="<?= $this->page->bodyClass; ?>">
+
+    <header class="header">
+        <?= partial('nav/menu'); ?>
+    </header>
+
+    <main role="main">
+        <div id="page-wrapper">
+            <?= partial('breadcrumb'); ?>
+
+            <?php if (isset($this->page->heading)) { ?>
+                <?= partial('heading', ['heading' => $this->page->heading]); ?>
+            <?php } ?>
+
+            <div class="container">
+                <div class="row py-4">
+                    <div class="col-sm-2 d-none d-sm-inline-block">
+                        <div class="categories affix-categories">
+                            <?= component('categories'); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="content">
+                            <?= component('localBox'); ?>
+
+                            <?= page(); ?>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <?= component('cartBox'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer pb-4">
+        <div class="footer-top">
+            <?= component('newsletter'); ?>
+        </div>
+
+        <div class="footer-bottom">
+            <?= partial('footer'); ?>
+        </div>
+    </footer>
+    <div id="notification">
+        <?= partial('flash'); ?>
+    </div>
+    <?= partial('eucookiebanner'); ?>
+    <?= partial('scripts'); ?>
+</body>
+</html>";s:4:"code";N;s:11:"description";s:12:"Local layout";s:9:"[session]";a:1:{s:8:"security";s:3:"all";}s:9:"[pageNav]";a:0:{}s:12:"[newsletter]";a:0:{}s:10:"[localBox]";a:7:{s:9:"paramFrom";s:8:"location";s:14:"showLocalThumb";i:0;s:9:"menusPage";s:11:"local/menus";s:14:"openTimeFormat";s:3:"H:i";s:20:"timePickerDateFormat";s:3:"D d";s:20:"timePickerTimeFormat";s:3:"H:i";s:24:"timePickerDateTimeFormat";s:7:"D d H:i";}s:12:"[categories]";a:1:{s:9:"menusPage";s:11:"local/menus";}s:9:"[cartBox]";a:5:{s:10:"timeFormat";s:7:"D H:i a";s:18:"checkStockCheckout";i:1;s:14:"pageIsCheckout";i:0;s:10:"pageIsCart";i:0;s:12:"checkoutPage";s:17:"checkout/checkout";}}}

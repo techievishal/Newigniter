@@ -1,0 +1,23 @@
+1566452847a:1:{s:17:"local\gallery.php";a:9:{s:8:"fileName";s:17:"local\gallery.php";s:5:"mTime";i:1565837145;s:7:"content";s:282:"---
+title: main::lang.local.gallery.title
+layout: local
+permalink: /:location?local/gallery
+
+'[localGallery]':
+---
+<?= partial('local/tabs', ['activeTab' => 'gallery']); ?>
+
+<div class="panel">
+    <div class="panel-body">
+        <?= component('localGallery') ?>
+    </div>
+</div>
+";s:6:"markup";s:168:"
+<?= partial('local/tabs', ['activeTab' => 'gallery']); ?>
+
+<div class="panel">
+    <div class="panel-body">
+        <?= component('localGallery') ?>
+    </div>
+</div>
+";s:4:"code";N;s:5:"title";s:30:"main::lang.local.gallery.title";s:6:"layout";s:5:"local";s:9:"permalink";s:24:"/:location?local/gallery";s:14:"[localGallery]";N;}}

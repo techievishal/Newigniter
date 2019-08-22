@@ -1,0 +1,47 @@
+.nav-menus {
+  padding: 0px $spacer;
+  background-color: $white;
+  margin: 2px 0;
+
+  .nav-link {
+    color: inherit;
+    padding: $spacer;
+    border-width: 0;
+  }
+
+  .nav-link.active {
+    background-color: transparent;
+    font-weight: $font-weight-bold;
+  }
+
+  .nav-link.active,
+  .nav-link:hover {
+    border-color: transparent;
+    color: $primary;
+  }
+}
+.nav-categories {
+  .nav-link {
+    color: $body-color;
+  }
+
+  .nav-link.active,
+  .show > .nav-link {
+    color: $nav-pills-link-active-bg;
+    font-weight: $font-weight-bold;
+  }
+}
+.menu-group-item {
+  border-bottom: 1px dashed var(--gray-300);
+}
+.menu-group-item .category-title {
+  padding: 12px 0;
+  margin-bottom: 0;
+}
+.menu-group-item .menu-category {
+  margin-bottom: 15px;
+}
+.menu-group-item .image {
+  max-height: 80px;
+  overflow: hidden;
+}

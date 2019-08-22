@@ -1,0 +1,40 @@
+1566452847a:1:{s:15:"local\menus.php";a:10:{s:8:"fileName";s:15:"local\menus.php";s:5:"mTime";i:1565837145;s:7:"content";s:549:"---
+title: 'main::lang.local.menus.title'
+permalink: '/:location?local/menus/:category?'
+description: ''
+layout: local
+
+'[localMenu]':
+    isGrouped: 1
+    menusPerPage: 200
+    showMenuImages: 0
+    menuImageWidth: 95
+    menuImageHeight: 80
+
+---
+<?= partial('local/tabs', ['activeTab' => 'menus']); ?>
+
+<div class="panel">
+    <div class="d-block d-sm-none">
+        <div class="categories">
+            <?= component('categories'); ?>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <?= component('localMenu') ?>
+    </div>
+</div>";s:6:"markup";s:302:"
+<?= partial('local/tabs', ['activeTab' => 'menus']); ?>
+
+<div class="panel">
+    <div class="d-block d-sm-none">
+        <div class="categories">
+            <?= component('categories'); ?>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <?= component('localMenu') ?>
+    </div>
+</div>";s:4:"code";N;s:5:"title";s:28:"main::lang.local.menus.title";s:9:"permalink";s:33:"/:location?local/menus/:category?";s:11:"description";s:0:"";s:6:"layout";s:5:"local";s:11:"[localMenu]";a:5:{s:9:"isGrouped";i:1;s:12:"menusPerPage";i:200;s:14:"showMenuImages";i:0;s:14:"menuImageWidth";i:95;s:15:"menuImageHeight";i:80;}}}

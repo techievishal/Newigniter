@@ -1,0 +1,39 @@
+1566452847a:1:{s:18:"account\orders.php";a:9:{s:8:"fileName";s:18:"account\orders.php";s:5:"mTime";i:1565837145;s:7:"content";s:498:"---
+title: main::lang.account.orders.title
+layout: account
+permalink: /account/orders/:orderId?
+
+'[accountOrders]':
+---
+<div class="container">
+    <div class="row py-5">
+        <div class="col-sm-3">
+            <?= partial('account::sidebar'); ?>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-body">
+                    <?= component('accountOrders'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+";s:6:"markup";s:379:"
+<div class="container">
+    <div class="row py-5">
+        <div class="col-sm-3">
+            <?= partial('account::sidebar'); ?>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-body">
+                    <?= component('accountOrders'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+";s:4:"code";N;s:5:"title";s:31:"main::lang.account.orders.title";s:6:"layout";s:7:"account";s:9:"permalink";s:25:"/account/orders/:orderId?";s:15:"[accountOrders]";N;}}

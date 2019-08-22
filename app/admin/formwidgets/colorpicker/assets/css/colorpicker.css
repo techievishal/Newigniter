@@ -1,0 +1,26 @@
+.colorpicker.dropdown-menu {
+	padding: 10px;
+}
+.colorpicker-2x .colorpicker-saturation {
+	width: 120px;
+	height: 120px;
+}
+.colorpicker-2x .colorpicker-hue,
+.colorpicker-2x .colorpicker-alpha {
+	width: 15px;
+	height: 120px;
+}
+.colorpicker-2x .colorpicker-color,
+.colorpicker-2x .colorpicker-color div,
+.colorpicker-2x .colorpicker-preview,
+.colorpicker-2x .colorpicker-preview div {
+	font-size: 16px;
+	line-height: 160%;
+}
+
+.colorpicker-saturation .colorpicker-guide,
+.colorpicker-saturation .colorpicker-guide i {
+	height: 10px;
+	width: 10px;
+	border-radius: 10px;
+}

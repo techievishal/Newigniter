@@ -1,0 +1,50 @@
+1566452847a:1:{s:8:"home.php";a:12:{s:8:"fileName";s:8:"home.php";s:5:"mTime";i:1566093753;s:7:"content";s:437:"---
+title: 'main::lang.home.title'
+permalink: /
+description: ''
+layout: default
+
+'[slider]': {  }
+
+'[localSearch]':
+    hideSearch: 0
+    menusPage: local/menus
+
+'[featuredItems]':
+    items: ['76', '77', '78', '79']
+    limit: 3
+    itemsPerRow: 3
+    itemWidth: 400
+    itemHeight: 300
+
+---
+<?php
+function onInit() {
+}
+
+function onStart() {
+}
+
+function onEnd() {
+}
+?>
+---
+<?= component('slider'); ?>
+
+<?= component('localSearch'); ?>
+
+";s:6:"markup";s:64:"
+<?= component('slider'); ?>
+
+<?= component('localSearch'); ?>
+
+";s:4:"code";s:76:"<?php
+function onInit() {
+}
+
+function onStart() {
+}
+
+function onEnd() {
+}
+?>";s:5:"title";s:21:"main::lang.home.title";s:9:"permalink";s:1:"/";s:11:"description";s:0:"";s:6:"layout";s:7:"default";s:8:"[slider]";a:0:{}s:13:"[localSearch]";a:2:{s:10:"hideSearch";i:0;s:9:"menusPage";s:11:"local/menus";}s:15:"[featuredItems]";a:5:{s:5:"items";a:4:{i:0;s:2:"76";i:1;s:2:"77";i:2;s:2:"78";i:3;s:2:"79";}s:5:"limit";i:3;s:11:"itemsPerRow";i:3;s:9:"itemWidth";i:400;s:10:"itemHeight";i:300;}}}

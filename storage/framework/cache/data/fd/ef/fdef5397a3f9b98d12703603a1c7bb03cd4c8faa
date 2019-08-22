@@ -1,0 +1,31 @@
+1566452847a:1:{s:23:"reservation\success.php";a:9:{s:8:"fileName";s:23:"reservation\success.php";s:5:"mTime";i:1565837145;s:7:"content";s:409:"---
+title: main::lang.reservation.success.title
+layout: default
+permalink: /reservation/success/:hash?
+
+'[booking]':
+---
+<div class="container">
+    <div class="row py-4">
+        <div class="col-6 m-auto">
+            <div class="card">
+                <div class="card-body">
+                    <?= partial('booking::success'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+";s:6:"markup";s:289:"
+<div class="container">
+    <div class="row py-4">
+        <div class="col-6 m-auto">
+            <div class="card">
+                <div class="card-body">
+                    <?= partial('booking::success'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+";s:4:"code";N;s:5:"title";s:36:"main::lang.reservation.success.title";s:6:"layout";s:7:"default";s:9:"permalink";s:27:"/reservation/success/:hash?";s:9:"[booking]";N;}}

@@ -1,0 +1,52 @@
+1566452847a:1:{s:20:"account\register.php";a:11:{s:8:"fileName";s:20:"account\register.php";s:5:"mTime";i:1565961056;s:7:"content";s:955:"---
+title: 'main::lang.account.register.title'
+permalink: /register
+description: ''
+layout: default
+
+'[session]':
+    security: guest
+
+'[account]':
+    accountPage: account/account
+    detailsPage: account/details
+    addressPage: account/address
+    ordersPage: account/orders
+    reservationsPage: account/reservations
+    reviewsPage: account/reviews
+    inboxPage: account/inbox
+    redirectPage: account/account
+    loginPage: account/login
+    agreeRegistrationTermsPage: 12
+
+---
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 mx-auto my-5">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title h4 mb-4 font-weight-normal">
+                        <?= lang('main::lang.account.login.text_register'); ?>
+                    </h1>
+
+                    <?= partial('account::register'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:6:"markup";s:470:"
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 mx-auto my-5">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title h4 mb-4 font-weight-normal">
+                        <?= lang('main::lang.account.login.text_register'); ?>
+                    </h1>
+
+                    <?= partial('account::register'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:4:"code";N;s:5:"title";s:33:"main::lang.account.register.title";s:9:"permalink";s:9:"/register";s:11:"description";s:0:"";s:6:"layout";s:7:"default";s:9:"[session]";a:1:{s:8:"security";s:5:"guest";}s:9:"[account]";a:10:{s:11:"accountPage";s:15:"account/account";s:11:"detailsPage";s:15:"account/details";s:11:"addressPage";s:15:"account/address";s:10:"ordersPage";s:14:"account/orders";s:16:"reservationsPage";s:20:"account/reservations";s:11:"reviewsPage";s:15:"account/reviews";s:9:"inboxPage";s:13:"account/inbox";s:12:"redirectPage";s:15:"account/account";s:9:"loginPage";s:13:"account/login";s:26:"agreeRegistrationTermsPage";i:12;}}}

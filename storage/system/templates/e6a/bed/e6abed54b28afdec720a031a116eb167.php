@@ -1,0 +1,5 @@
+
+<?= component('slider'); ?>
+
+<?= component('localSearch'); ?>
+

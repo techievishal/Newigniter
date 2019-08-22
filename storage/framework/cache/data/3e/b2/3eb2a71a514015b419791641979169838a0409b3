@@ -1,0 +1,66 @@
+1566452847a:1:{s:21:"checkout\checkout.php";a:12:{s:8:"fileName";s:21:"checkout\checkout.php";s:5:"mTime";i:1565837145;s:7:"content";s:974:"---
+title: main::lang.checkout.title
+layout: default
+permalink: /checkout
+
+'[account]':
+
+'[localBox]':
+    paramFrom: location
+    showLocalThumb: 0
+    menusPage: local/menus
+    openTimeFormat: 'H:i'
+    timePickerDateFormat: 'D d'
+    timePickerTimeFormat: 'H:i'
+    timePickerDateTimeFormat: 'D d H:i'
+
+'[cartBox]':
+    pageIsCheckout: true
+
+'[checkout]':
+    showCountryField: 0
+---
+<div class="container">
+    <div class="row py-4">
+        <div class="col col-sm-8">
+            <?= component('localBox'); ?>
+
+            <div class="card my-1">
+                <div class="card-body">
+                    <?= partial('account::welcome'); ?>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <?= component('checkout'); ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <?= component('cartBox'); ?>
+        </div>
+    </div>
+</div>";s:6:"markup";s:587:"
+<div class="container">
+    <div class="row py-4">
+        <div class="col col-sm-8">
+            <?= component('localBox'); ?>
+
+            <div class="card my-1">
+                <div class="card-body">
+                    <?= partial('account::welcome'); ?>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <?= component('checkout'); ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <?= component('cartBox'); ?>
+        </div>
+    </div>
+</div>";s:4:"code";N;s:5:"title";s:25:"main::lang.checkout.title";s:6:"layout";s:7:"default";s:9:"permalink";s:9:"/checkout";s:9:"[account]";N;s:10:"[localBox]";a:7:{s:9:"paramFrom";s:8:"location";s:14:"showLocalThumb";i:0;s:9:"menusPage";s:11:"local/menus";s:14:"openTimeFormat";s:3:"H:i";s:20:"timePickerDateFormat";s:3:"D d";s:20:"timePickerTimeFormat";s:3:"H:i";s:24:"timePickerDateTimeFormat";s:7:"D d H:i";}s:9:"[cartBox]";a:1:{s:14:"pageIsCheckout";b:1;}s:10:"[checkout]";a:1:{s:16:"showCountryField";i:0;}}}

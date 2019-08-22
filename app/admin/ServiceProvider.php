@@ -1,0 +1,466 @@
+<?php
+
+namespace Admin;
+
+use Admin\Classes\Navigation;
+use Admin\Classes\OnboardingSteps;
+use Admin\Classes\Widgets;
+use AdminAuth;
+use AdminMenu;
+use Event;
+use Igniter\Flame\ActivityLog\Models\Activity;
+use Igniter\Flame\Foundation\Providers\AppServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use System\Libraries\Assets;
+use System\Models\Mail_templates_model;
+
+class ServiceProvider extends AppServiceProvider
+{
+    /**
+     * Bootstrap the service provider.
+     * @return void
+     */
+    public function boot()
+    {
+        parent::boot('admin');
+
+        $this->defineEloquentMorphMaps();
+
+        if ($this->app->runningInAdmin()) {
+            $this->resolveFlashSessionKey();
+            $this->replaceNavMenuItem();
+
+            $this->bindActivityEvents();
+        }
+    }
+
+    /**
+     * Register the service provider.
+     * @return void
+     */
+    public function register()
+    {
+        parent::register('admin');
+
+        $this->registerMailTemplates();
+
+        if ($this->app->runningInAdmin()) {
+            $this->registerAssets();
+          //  $this->registerDashboardWidgets();
+            $this->registerFormWidgets();
+            $this->registerMainMenuItems();
+            $this->registerNavMenuItems();
+            $this->registerOnboardingSteps();
+            $this->registerActivityTypes();
+        }
+    }
+
+    protected function registerMailTemplates()
+    {
+        Mail_templates_model::registerCallback(function (Mail_templates_model $template) {
+            $template->registerTemplates([
+                'admin::_mail.order_update' => 'lang:system::lang.mail_templates.text_order_update',
+                'admin::_mail.reservation_update' => 'lang:system::lang.mail_templates.text_reservation_update',
+                'admin::_mail.password_reset' => 'lang:system::lang.mail_templates.text_password_reset_alert',
+                'admin::_mail.password_reset_request' => 'lang:system::lang.mail_templates.text_password_reset_request_alert',
+            ]);
+        });
+    }
+
+    protected function registerAssets()
+    {
+        Assets::registerCallback(function (Assets $manager) {
+            $manager->registerSourcePath(app_path('admin/assets'));
+
+            $manager->addFromManifest('~/app/admin/views/_meta/assets.json');
+        });
+    }
+
+    /*
+     * Register dashboard widgets
+     */
+    protected function registerDashboardWidgets()
+    {
+        Widgets::instance()->registerDashboardWidgets(function (Widgets $manager) {
+            $manager->registerDashboardWidget(\System\DashboardWidgets\Activities::class, [
+                'label' => 'Recent activities',
+                'context' => 'dashboard',
+            ]);
+
+            $manager->registerDashboardWidget(\System\DashboardWidgets\Cache::class, [
+                'label' => 'Cache Usage',
+                'context' => 'dashboard',
+            ]);
+
+            $manager->registerDashboardWidget(\System\DashboardWidgets\News::class, [
+                'label' => 'Latest News',
+                'context' => 'dashboard',
+            ]);
+
+            $manager->registerDashboardWidget(\Admin\DashboardWidgets\Statistics::class, [
+                'label' => 'Statistics widget',
+                'context' => 'dashboard',
+            ]);
+
+            $manager->registerDashboardWidget(\Admin\DashboardWidgets\Onboarding::class, [
+                'label' => 'Onboarding widget',
+                'context' => 'dashboard',
+            ]);
+
+            $manager->registerDashboardWidget(\Admin\DashboardWidgets\Charts::class, [
+                'label' => 'Charts widget',
+                'context' => 'dashboard',
+            ]);
+        });
+    }
+
+    /**
+     * Register widgets
+     */
+    protected function registerFormWidgets()
+    {
+        Widgets::instance()->registerFormWidgets(function (Widgets $manager) {
+            $manager->registerFormWidget('Admin\FormWidgets\CodeEditor', [
+                'label' => 'Code editor',
+                'code' => 'codeeditor',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\ColorPicker', [
+                'label' => 'Color picker',
+                'code' => 'colorpicker',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\Components', [
+                'label' => 'Components',
+                'code' => 'components',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\Connector', [
+                'label' => 'Connector',
+                'code' => 'connector',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\DataTable', [
+                'label' => 'Data Table',
+                'code' => 'datatable',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\DatePicker', [
+                'label' => 'Date picker',
+                'code' => 'datepicker',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\MapArea', [
+                'label' => 'Map Area',
+                'code' => 'maparea',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\MediaFinder', [
+                'label' => 'Media finder',
+                'code' => 'mediafinder',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\PermissionEditor', [
+                'label' => 'Permission Editor',
+                'code' => 'permissioneditor',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\RecordEditor', [
+                'label' => 'Record Editor',
+                'code' => 'recordeditor',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\Relation', [
+                'label' => 'Relationship',
+                'code' => 'relation',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\Repeater', [
+                'label' => 'Repeater',
+                'code' => 'repeater',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\RichEditor', [
+                'label' => 'Rich editor',
+                'code' => 'richeditor',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\StatusEditor', [
+                'label' => 'Status Editor',
+                'code' => 'statuseditor',
+            ]);
+
+            $manager->registerFormWidget('Admin\FormWidgets\StarRating', [
+                'label' => 'Star Rating',
+                'code' => 'starrating',
+            ]);
+        });
+    }
+
+    /**
+     * Register admin top menu navigation items
+     */
+    protected function registerMainMenuItems()
+    {
+        AdminMenu::registerCallback(function (Navigation $manager) {
+            $manager->registerMainItems([
+                'preview' => [
+                    'icon' => 'fa-store',
+                    'attributes' => [
+                        'class' => 'nav-link front-end',
+                        'title' => 'lang:admin::lang.side_menu.storefront',
+                        'href' => root_url(),
+                        'target' => '_blank',
+                    ],
+                ],
+                
+                'settings' => [
+                    'type' => 'partial',
+                    'path' => 'top_settings_menu',
+                    'options' => ['System\Models\Settings_model', 'listMenuSettingItems'],
+                    'permission' => 'Site.Settings',
+                ],
+                'user' => [
+                    'type' => 'partial',
+                    'path' => 'top_nav_user_menu',
+                ],
+            ]);
+        });
+    }
+
+    /**
+     * Register admin menu navigation items
+     */
+    protected function registerNavMenuItems()
+    {
+        AdminMenu::registerCallback(function (Navigation $manager) {
+            $manager->registerNavItems([
+                /*'dashboard' => [
+                    'priority' => 0,
+                    'class' => 'dashboard admin',
+                    'href' => admin_url('dashboard'),
+                    'icon' => 'fa-tachometer-alt',
+                    'title' => lang('admin::lang.side_menu.dashboard'),
+                    'permission' => 'Admin.Dashboard',
+                ],*/
+                'restaurant' => [
+                    'priority' => 10,
+                    'class' => 'restaurant',
+                    'icon' => 'fa-store',
+                    'title' => lang('admin::lang.side_menu.restaurant'),
+                    'href' => admin_url('staffs'),                    
+                ],
+                'kitchen' => [
+                    'priority' => 20,
+                    'class' => 'kitchen',
+                    'icon' => 'fa-utensils',
+                    'title' => lang('admin::lang.side_menu.kitchen'),
+                    'child' => [
+                        'menus' => [
+                            'priority' => 10,
+                            'class' => 'menus',
+                            'href' => admin_url('menus'),
+                            'title' => lang('admin::lang.side_menu.menu'),
+                            'permission' => 'Admin.Menus',
+                        ],
+                        'categories' => [
+                            'priority' => 20,
+                            'class' => 'categories',
+                            'href' => admin_url('categories'),
+                            'title' => lang('admin::lang.side_menu.category'),
+                            'permission' => 'Admin.Categories',
+                        ],
+                    ],
+                ],       
+                
+                'Import' => [
+                    'priority' => 100,
+                    'class' => 'dashboard admin',
+                    'href' => admin_url('import'),
+                    'icon' => 'fa-tachometer-alt',
+                    'title' => lang('Import Users'),
+                    'permission' => 'Admin.Dashboard',
+                ],
+                'Logout' => [
+                    'priority' => 100,
+                    'class' => 'dashboard admin',
+                    'href' => admin_url('logout'),
+                    'icon' => 'fa-tachometer-alt',
+                    'title' => lang('Logout'),
+                    'permission' => 'Admin.Dashboard',
+                ],
+               /* 'design' => [
+                    'priority' => 200,
+                    'class' => 'design',
+                    'icon' => 'fa-paint-brush',
+                    'title' => lang('admin::lang.side_menu.design'),
+                    'child' => [
+                        'themes' => [
+                            'priority' => 10,
+                            'class' => 'themes',
+                            'href' => admin_url('themes'),
+                            'title' => lang('admin::lang.side_menu.theme'),
+                            'permission' => 'Site.Themes',
+                        ],
+                        'mail_templates' => [
+                            'priority' => 20,
+                            'class' => 'mail_templates',
+                            'href' => admin_url('mail_templates'),
+                            'title' => lang('admin::lang.side_menu.mail_template'),
+                            'permission' => 'Admin.MailTemplates',
+                        ],
+                    ],
+                ],*/
+                
+            
+            ]);
+        });
+    }
+
+    protected function replaceNavMenuItem()
+    {
+        AdminMenu::registerCallback(function (Navigation $manager) {
+            // Change nav menu if single location mode is activated
+            if (!AdminAuth::isStrictLocation())
+                return;
+
+            $manager->removeNavItem('locations', 'restaurant');
+
+            $manager->addNavItem('locations', [
+                'priority' => '1',
+                'class' => 'locations',
+                'href' => admin_url('locations/settings'),
+                'title' => lang('admin::lang.side_menu.setting'),
+                'permission' => 'Admin.Locations',
+            ], 'restaurant');
+        });
+    }
+
+    protected function defineEloquentMorphMaps()
+    {
+        Relation::morphMap([
+            'addresses' => 'Admin\Models\Addresses_model',
+            'categories' => 'Admin\Models\Categories_model',
+            'coupons_history' => 'Admin\Models\Coupons_history_model',
+            'coupons' => 'Admin\Models\Coupons_model',
+            'customer_groups' => 'Admin\Models\Customer_groups_model',
+            'customers' => 'Admin\Models\Customers_model',
+            'location_areas' => 'Admin\Models\Location_areas_model',
+            'location_tables' => 'Admin\Models\Location_tables_model',
+            'locations' => 'Admin\Models\Locations_model',
+            'mealtimes' => 'Admin\Models\Mealtimes_model',
+            'menu_categories' => 'Admin\Models\Menu_categories_model',
+            'menu_item_option_values' => 'Admin\Models\Menu_item_option_values_model',
+            'menu_item_options' => 'Admin\Models\Menu_item_options_model',
+            'menu_option_values' => 'Admin\Models\Menu_option_values_model',
+            'menu_options' => 'Admin\Models\Menu_options_model',
+            'menus' => 'Admin\Models\Menus_model',
+            'menus_specials' => 'Admin\Models\Menus_specials_model',
+            'orders' => 'Admin\Models\Orders_model',
+            'payment_logs' => 'Admin\Models\Payment_logs_model',
+            'payments' => 'Admin\Models\Payments_model',
+            'reservations' => 'Admin\Models\Reservations_model',
+            'reviews' => 'Admin\Models\Reviews_model',
+            'staff_groups' => 'Admin\Models\Staff_groups_model',
+            'staffs' => 'Admin\Models\Staffs_model',
+            'status_history' => 'Admin\Models\Status_history_model',
+            'statuses' => 'Admin\Models\Statuses_model',
+            'tables' => 'Admin\Models\Tables_model',
+            'users' => 'Admin\Models\Users_model',
+            'working_hours' => 'Admin\Models\Working_hours_model',
+        ]);
+    }
+
+    protected function resolveFlashSessionKey()
+    {
+        $this->app->resolving('flash', function (\Igniter\Flame\Flash\FlashBag $flash) {
+            $flash->setSessionKey('flash_data_admin');
+        });
+    }
+
+    protected function registerOnboardingSteps()
+    {
+        OnboardingSteps::registerCallback(function (OnboardingSteps $manager) {
+            $manager->registerSteps([
+                'admin::settings' => [
+                    'label' => 'admin::lang.dashboard.onboarding.label_settings',
+                    'description' => 'admin::lang.dashboard.onboarding.help_settings',
+                    'icon' => 'fa-gears',
+                    'url' => admin_url('settings'),
+                    'complete' => ['System\Models\Settings_model', 'onboardingIsComplete'],
+                ],
+                'admin::locations' => [
+                    'label' => 'admin::lang.dashboard.onboarding.label_locations',
+                    'description' => 'admin::lang.dashboard.onboarding.help_locations',
+                    'icon' => 'fa-store',
+                    'url' => admin_url('locations'),
+                    'complete' => ['Admin\Models\Locations_model', 'onboardingIsComplete'],
+                ],
+                'admin::themes' => [
+                    'label' => 'admin::lang.dashboard.onboarding.label_themes',
+                    'description' => 'admin::lang.dashboard.onboarding.help_themes',
+                    'icon' => 'fa-paint-brush',
+                    'url' => admin_url('themes'),
+                    'complete' => ['System\Models\Themes_model', 'onboardingIsComplete'],
+                ],
+                'admin::extensions' => [
+                    'label' => 'admin::lang.dashboard.onboarding.label_extensions',
+                    'description' => 'admin::lang.dashboard.onboarding.help_extensions',
+                    'icon' => 'fa-plug',
+                    'url' => admin_url('extensions'),
+                    'complete' => ['System\Models\Extensions_model', 'onboardingIsComplete'],
+                ],
+                'admin::payments' => [
+                    'label' => 'admin::lang.dashboard.onboarding.label_payments',
+                    'description' => 'admin::lang.dashboard.onboarding.help_payments',
+                    'icon' => 'fa-credit-card',
+                    'url' => admin_url('payments'),
+                    'complete' => ['Admin\Models\Payments_model', 'onboardingIsComplete'],
+                ],
+                'admin::menus' => [
+                    'label' => 'admin::lang.dashboard.onboarding.label_menus',
+                    'description' => 'admin::lang.dashboard.onboarding.help_menus',
+                    'icon' => 'fa-cutlery',
+                    'url' => admin_url('menus'),
+                ],
+                'admin::mail' => [
+                    'label' => 'admin::lang.dashboard.onboarding.label_mail',
+                    'description' => 'admin::lang.dashboard.onboarding.help_mail',
+                    'icon' => 'fa-envelope',
+                    'url' => admin_url('settings/edit/mail'),
+                ],
+            ]);
+        });
+    }
+
+    protected function registerActivityTypes()
+    {
+        Activity::registerCallback(function (Activity $manager) {
+            $manager->registerActivityTypes([
+                ActivityTypes\OrderAssigned::class,
+                ActivityTypes\OrderStatusUpdated::class,
+                ActivityTypes\ReservationAssigned::class,
+                ActivityTypes\ReservationStatusUpdated::class,
+            ]);
+        });
+    }
+
+    protected function bindActivityEvents()
+    {
+        Event::listen('admin.order.assigned', function ($model) {
+            ActivityTypes\OrderAssigned::pushActivityLog($model);
+        });
+
+        Event::listen('admin.reservation.assigned', function ($model) {
+            ActivityTypes\ReservationAssigned::pushActivityLog($model);
+        });
+
+        Event::listen('admin.statusHistory.beforeAddStatus', function ($model, $object, $statusId, $previousStatus) {
+            if ($object instanceof Models\Orders_model)
+                ActivityTypes\OrderStatusUpdated::pushActivityLog($model, $object);
+
+            if ($object instanceof Models\Reservations_model)
+                ActivityTypes\ReservationStatusUpdated::pushActivityLog($model, $object);
+        });
+    }
+}

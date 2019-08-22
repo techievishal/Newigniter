@@ -1,0 +1,66 @@
+1566452847a:1:{s:9:"pages.php";a:9:{s:8:"fileName";s:9:"pages.php";s:5:"mTime";i:1565837145;s:7:"content";s:818:"---
+title: main::lang.pages.title
+layout: default
+permalink: /pages/:slug
+
+'[sitePage]':
+    slug: ':slug'
+---
+<?
+function onEnd()
+{
+    $this->title = $this['sitePage'] ? $this['sitePage']->title : $this->title;
+}
+?>
+---
+<div class="container py-4">
+    <div id="heading" class="row">
+        <div class="col-md-12">
+            <div class="heading-section">
+                <h2><?= $sitePage ? $sitePage->title : null; ?></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <?= partial('pageNav::sidebar'); ?>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-body">
+                    <?= component('sitePage'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:6:"markup";s:597:"
+<div class="container py-4">
+    <div id="heading" class="row">
+        <div class="col-md-12">
+            <div class="heading-section">
+                <h2><?= $sitePage ? $sitePage->title : null; ?></h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <?= partial('pageNav::sidebar'); ?>
+        </div>
+
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-body">
+                    <?= component('sitePage'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:4:"code";s:106:"<?
+function onEnd()
+{
+    $this->title = $this['sitePage'] ? $this['sitePage']->title : $this->title;
+}
+?>";s:5:"title";s:22:"main::lang.pages.title";s:6:"layout";s:7:"default";s:9:"permalink";s:12:"/pages/:slug";s:10:"[sitePage]";a:1:{s:4:"slug";s:5:":slug";}}}

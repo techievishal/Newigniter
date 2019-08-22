@@ -1,0 +1,42 @@
+1566452847a:1:{s:17:"account\reset.php";a:11:{s:8:"fileName";s:17:"account\reset.php";s:5:"mTime";i:1565837145;s:7:"content";s:631:"---
+title: main::lang.account.reset.title
+layout: default
+permalink: /forgot-password/:code?
+
+'[session]':
+    security: guest
+
+'[account]':
+
+'[resetPassword]':
+---
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 mx-auto my-5">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title h4 mb-4 font-weight-normal">
+                        <?= lang('main::lang.account.reset.text_heading'); ?>
+                    </h1>
+
+                    <?= component('resetPassword'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:6:"markup";s:467:"
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 mx-auto my-5">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title h4 mb-4 font-weight-normal">
+                        <?= lang('main::lang.account.reset.text_heading'); ?>
+                    </h1>
+
+                    <?= component('resetPassword'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:4:"code";N;s:5:"title";s:30:"main::lang.account.reset.title";s:6:"layout";s:7:"default";s:9:"permalink";s:23:"/forgot-password/:code?";s:9:"[session]";a:1:{s:8:"security";s:5:"guest";}s:9:"[account]";N;s:15:"[resetPassword]";N;}}

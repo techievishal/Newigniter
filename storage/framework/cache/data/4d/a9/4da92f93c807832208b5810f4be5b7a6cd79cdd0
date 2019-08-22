@@ -1,0 +1,29 @@
+1566452847a:1:{s:20:"checkout\success.php";a:9:{s:8:"fileName";s:20:"checkout\success.php";s:5:"mTime";i:1565837145;s:7:"content";s:404:"---
+title: main::lang.checkout.success.title
+layout: default
+permalink: /checkout/success/:hash?
+
+'[checkout]':
+---
+<div class="container">
+    <div class="row py-4">
+        <div class="col-6 m-auto">
+            <div class="card">
+                <div class="card-body">
+                    <?= partial('checkout::success'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:6:"markup";s:289:"
+<div class="container">
+    <div class="row py-4">
+        <div class="col-6 m-auto">
+            <div class="card">
+                <div class="card-body">
+                    <?= partial('checkout::success'); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>";s:4:"code";N;s:5:"title";s:33:"main::lang.checkout.success.title";s:6:"layout";s:7:"default";s:9:"permalink";s:24:"/checkout/success/:hash?";s:10:"[checkout]";N;}}

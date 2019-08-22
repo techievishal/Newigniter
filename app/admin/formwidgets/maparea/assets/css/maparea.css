@@ -1,0 +1,27 @@
+.map-area-toolbar {
+	background-color: var(--gray-400);
+	padding: 10px;
+}
+.map-area {
+	border-radius: 0;
+	border-width: 0 0 1px;
+}
+.map-area-header {
+	background-color: var(--gray-300);
+}
+.map-area-header .map-area-title {
+	margin-bottom: 0;
+}
+.map-modal .area-labels {
+	overflow: auto;
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin-top: 10px;
+	z-index: 1004;
+}
+.map-modal .area-labels .badge {
+	padding: 10px;
+	margin-right: 5px;
+	cursor: pointer;
+}

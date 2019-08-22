@@ -1,0 +1,31 @@
+1566452847a:1:{s:13:"locations.php";a:9:{s:8:"fileName";s:13:"locations.php";s:5:"mTime";i:1565837145;s:7:"content";s:461:"---
+title: main::lang.locations.title
+layout: default
+permalink: /locations
+
+'[localList]':
+---
+<div class="container">
+    <div class="row py-4">
+        <div class="locations-filter col-sm-3">
+            <?php if (has_component('localList')) { ?>
+                <?= partial('localList::filter'); ?>
+            <?php } ?>
+        </div>
+        <div class="location-list col-sm-9">
+            <?= component('localList'); ?>
+        </div>
+    </div>
+</div>";s:6:"markup";s:366:"
+<div class="container">
+    <div class="row py-4">
+        <div class="locations-filter col-sm-3">
+            <?php if (has_component('localList')) { ?>
+                <?= partial('localList::filter'); ?>
+            <?php } ?>
+        </div>
+        <div class="location-list col-sm-9">
+            <?= component('localList'); ?>
+        </div>
+    </div>
+</div>";s:4:"code";N;s:5:"title";s:26:"main::lang.locations.title";s:6:"layout";s:7:"default";s:9:"permalink";s:10:"/locations";s:11:"[localList]";N;}}
